@@ -1,0 +1,15 @@
+#!/bin/bash
+
+export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+INSTANCE_ID=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/instance-id)
+CLOUDFRONT_PRIVATE_KEY="$(aws ssm get-parameter \
+    --name "${CLOUDFRONT_PRIVATE_KEY_ENV_PATH}" --with-decryption | jq -r '.Parameter.Value' -)"
+printf "$(aws ssm get-parameter \
+    --name "${APP_ENVS_PATH}" --with-decryption | jq -r '.Parameter.Value' -)" > ~/app.env
+
+docker run \
+-itd --env-file ~/app.env \
+-e CLOUDFRONT_PRIVATE_KEY="$CLOUDFRONT_PRIVATE_KEY" \
+-p "80:80" lunacircle4/tbs
+
+aws ec2 associate-address --instance-id $INSTANCE_ID --allocation-id ${ALLOCATION_ID}
