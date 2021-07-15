@@ -1,0 +1,1 @@
+variable "tgw_arn" {}
