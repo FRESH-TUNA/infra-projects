@@ -1,0 +1,1 @@
+https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-nat-igw.html
