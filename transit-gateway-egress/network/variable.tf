@@ -3,3 +3,5 @@ variable "AWS_SECRET_ACCESS_KEY" {}
 variable "AWS_REGION" {}
 variable "ORGANIZATIONS_ARN" {}
 variable "CLIENT_1_CIDR" {}
+variable "CLIENT_2_CIDR" {}
+

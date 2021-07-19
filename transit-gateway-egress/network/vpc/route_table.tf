@@ -12,6 +12,11 @@ resource "aws_route_table" "public" {
     transit_gateway_id = var.transit_gateway_id
   }
 
+  route {
+    cidr_block = var.client_2_cidr
+    transit_gateway_id = var.transit_gateway_id
+  }
+
   tags = {
     Name = "main"
   }

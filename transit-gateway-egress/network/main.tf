@@ -16,6 +16,7 @@ module "vpc" {
   source = "./vpc"
   nat_gateway_id = module.nat.id
   client_1_cidr = var.CLIENT_1_CIDR
+  client_2_cidr = var.CLIENT_2_CIDR
   transit_gateway_id = module.tgw.id
 }
 
