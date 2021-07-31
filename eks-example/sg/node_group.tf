@@ -1,6 +1,6 @@
-resource "aws_security_group" "cluster" {
+resource "aws_security_group" "node_group" {
 	name = "kuberkuber-eks"
-	description = "Cluster communication with worker nodes"
+	description = "node group"
 	vpc_id = var.eks_vpc_id
 
 	egress {
