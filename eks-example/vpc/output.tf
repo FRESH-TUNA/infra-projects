@@ -10,7 +10,7 @@ output "public_subnet_ids" {
   ]
 }
 
-output "private_subnet_ids" {
+output "cluster_private_subnet_ids" {
   value = [
     aws_subnet.private_1.id,
     aws_subnet.private_2.id,

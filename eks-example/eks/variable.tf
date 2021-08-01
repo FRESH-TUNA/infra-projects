@@ -1,11 +1,22 @@
-variable "eks_cluster_role_arn" {
+variable "cluster_role_arn" {
   type = string
 }
 
-variable "eks_cluster_subnets" {
+variable "node_group_role_arn" {
+  type = string
+}
+
+variable "cluster_subnets" {
   type = list
 }
 
-variable "eks_node_group_arn" {
-  type = string
+variable "cluster_security_group_ids" {
+  type = list
 }
+
+variable "cluster_attachment_1" {}
+variable "cluster_attachment_2" {}
+
+variable "node_group_attachment_1" {}
+variable "node_group_attachment_2" {}
+variable "node_group_attachment_3" {}
