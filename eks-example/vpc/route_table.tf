@@ -67,7 +67,7 @@ resource "aws_route_table_association" "db_private_2" {
   route_table_id = aws_route_table.private.id
 }
 
-resource "aws_route_table_association" "db_private_3" {
-  subnet_id      = aws_subnet.db_private_3.id
-  route_table_id = aws_route_table.private.id
-}
+# resource "aws_route_table_association" "db_private_3" {
+#   subnet_id      = aws_subnet.db_private_3.id
+#   route_table_id = aws_route_table.private.id
+# }

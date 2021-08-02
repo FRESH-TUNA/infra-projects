@@ -1,5 +1,5 @@
 resource "aws_iam_role" "node_group" {
-  name = "eks-cluster-example"
+  name = "eks-cluster-example_node_group"
 
   # trust policy
   assume_role_policy = <<POLICY
@@ -31,6 +31,6 @@ resource "aws_iam_role_policy_attachment" "amazonEKS_CNI_Policy" {
 
 # ECR 접근권한
 resource "aws_iam_role_policy_attachment" "amazonEC2ContainerRegistryReadOnly" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly "
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = aws_iam_role.node_group.name
 }

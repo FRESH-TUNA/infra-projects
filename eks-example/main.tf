@@ -27,12 +27,13 @@ module "iam" {
 
 module "eks" {
   source = "./eks"
-
+  cluster_name = "floweryroad"
+  
   cluster_role_arn = module.iam.cluster_arn
   node_group_role_arn = module.iam.node_group_arn
 
   cluster_subnets = module.vpc.cluster_private_subnet_ids
-  cluster_security_group_ids = [module.sg.cluster_id, module.sg.node_group_id]
+  cluster_security_group_ids = [module.sg.cluster_id]
   
   # cluster_attachments
   cluster_attachment_1 = module.iam.cluster_attachment_amazonEKSClusterPolicy

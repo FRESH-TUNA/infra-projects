@@ -22,7 +22,7 @@ output "db_private_subnet_ids" {
   value = [
     aws_subnet.db_private_1.id,
     aws_subnet.db_private_2.id,
-    aws_subnet.db_private_3.id
+    # aws_subnet.db_private_3.id
   ]
 }
 

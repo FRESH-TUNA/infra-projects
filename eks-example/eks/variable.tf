@@ -1,3 +1,5 @@
+variable "cluster_name" {}
+
 variable "cluster_role_arn" {
   type = string
 }
