@@ -12,9 +12,9 @@ variable "cluster_subnets" {
   type = list
 }
 
-variable "cluster_security_group_ids" {
-  type = list
-}
+# variable "cluster_security_group_ids" {
+#   type = list
+# }
 
 variable "cluster_attachment_1" {}
 variable "cluster_attachment_2" {}
