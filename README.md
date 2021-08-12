@@ -22,3 +22,6 @@
 
 ### 중앙 집중식 아웃바운드 라우팅<br>
 <a href="/transit-gateway-egress">/transit-gateway-egress</a>
+
+### EKS 클러스터 실습<br>
+<a href="/eks-example">/eks-example</a>
