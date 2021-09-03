@@ -2,11 +2,14 @@
 
 ## 목록
 ### eip를 활용한 고가용성 환경 구축<br>
-[<a href="/eip-auto-allocate">/eip-auto-allocate</a>]
+<a href="/eip-auto-allocate">/eip-auto-allocate</a>
 
 ### 오로라 구축 실습<br>
 <a href="/aurora">프로비저닝</a>
 <a href="/aurora_serverless">서버리스</a>
+
+### Parameter Store 실습<br>
+<a href="/parameter_store">/parameter_store</a>
 
 ### cloudfront signed cookie 를 활용한 간단한 스트리밍 서비스<br>
 <a href="/cloudfront-signed-cookie-example">/cloudfront-signed-cookie-example</a>
