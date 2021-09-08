@@ -23,5 +23,5 @@ output "tuna-eks-cluster_ca" {
 }
 
 output "tuna-eks-cluster_endpoint" {
-    value = aws_eks_cluster.cluster.certificate_authority[0].data
+    value = aws_eks_cluster.cluster.endpoint
 }

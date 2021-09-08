@@ -1,5 +1,7 @@
 resource "aws_launch_template" "tuna-eks-cluster" {
-  image_id = "ami-0a0de518b1fc4524c"
+  image_id = "ami-065032e477e2adb5e"
+
+  # default_version = 2
 
   instance_type = "t3.small"
 

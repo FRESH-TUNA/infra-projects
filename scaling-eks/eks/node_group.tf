@@ -2,18 +2,18 @@ resource "aws_eks_node_group" "node_group" {
   cluster_name    = aws_eks_cluster.cluster.name
   node_group_name = "node_group"
   node_role_arn   = var.node_group_role_arn
-  subnet_ids      = var.cluster_subnets
+  subnet_ids      = var.node_group_subnets
   # 최소 t3.small 로 진행
-    instance_types = ["t3.small"]
+  # instance_types = ["t3.small"]
 
   launch_template {
     id = var.tuna-eks-cluster-node-launch_template_id
-    version = "$Default"
+    version = "$Latest"
   }
 
   scaling_config {
-    desired_size = 1
-    max_size     = 1
+    desired_size = 2
+    max_size     = 3
     min_size     = 1
   }
 

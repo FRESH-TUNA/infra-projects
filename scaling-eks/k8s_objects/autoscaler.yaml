@@ -137,7 +137,8 @@ spec:
       annotations:
         prometheus.io/scrape: 'true'
         prometheus.io/port: '8085'
-        cluster-autoscaler.kubernetes.io/safe-to-evict: 'false'
+        # scale down후 up시 시간이 많이 걸리는 리소스라면 아래 구문으로 downscale을 막을수 있다.
+        # cluster-autoscaler.kubernetes.io/safe-to-evict: 'false'
     spec:
       serviceAccountName: cluster-autoscaler
       containers:
