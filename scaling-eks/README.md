@@ -13,9 +13,14 @@
 ---------------------
 hpa 적용
 hpa 테스트
----------------------
-vpa 적용
-vpa 테스트
 
-## 로그 확인
+
+## cluster autoscaler로그 확인
 kubectl -n kube-system logs -f deployment.apps/cluster-autoscaler
+
+## hpa 확인
+kubectl describe hpa
+
+## 매트릭 확인
+kubectl top pods
+kubectl top nodes

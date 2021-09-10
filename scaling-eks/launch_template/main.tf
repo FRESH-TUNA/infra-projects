@@ -3,7 +3,8 @@ resource "aws_launch_template" "tuna-eks-cluster" {
 
   # default_version = 2
 
-  instance_type = "t3.small"
+  # anti pattern
+  # instance_type = "t3.small"
 
   name = "tuna-eks-cluster-node-launch_template"
 
