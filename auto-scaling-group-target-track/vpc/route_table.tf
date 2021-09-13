@@ -18,6 +18,11 @@ resource "aws_route_table" "private" {
   tags = {
     Name = "main"
   }
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    instance_id = var.nat_id
+  }
 }
 
 # route table association

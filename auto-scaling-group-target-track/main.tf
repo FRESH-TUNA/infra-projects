@@ -1,5 +1,5 @@
 terraform {
-  required_version = "0.13.5"
+  required_version = "1.0.5"
 
   required_providers {
     aws = ">= 2.53.0"
@@ -10,20 +10,9 @@ provider "aws" {
   region = "ap-northeast-2"
 }
 
-module aws_caller_identity {
-  source = "./aws_caller_identity"
-}
-
 module "vpc" {
   source = "./vpc"
-}
-
-module "eip" {
-  source = "./eip"
-}
-
-module "key" {
-  source = "./key"
+  nat_id = module.ec2.nat_id
 }
 
 module "sg" {
@@ -31,23 +20,28 @@ module "sg" {
   vpc_id = module.vpc.id
 }
 
-module "iam" {
-  source = "./iam"
-  account_id = module.aws_caller_identity.account_id
-  eip_allocation_id = module.eip.allocation_id
-  region = "ap-northeast-2"
-}
-
 module "launch_template" {
   source = "./launch_template"
-  key_name = module.key.key_name
-  eip_allocation_id = module.eip.allocation_id
-  vpc_security_group_ids = [module.sg.id]
-  instance_profile_name = module.iam.instance_profile_name
+  logic_security_group_ids = [module.sg.logic_id]
+}
+
+module "lb" {
+  source = "./lb"
+  lb_sg_ids = [module.sg.lb_id]
+  lb_subnets = module.vpc.public_subnet_ids
+  vpc_id = module.vpc.id
 }
 
 module "asg" {
   source = "./asg"
   aws_launch_template_id = module.launch_template.id
-  subnet_ids = module.vpc.public_subnet_ids
+  subnet_ids = module.vpc.private_subnet_ids
+  logic_target_group_arns = [module.lb.tuna_target_group_arn]
+}
+
+module "ec2" {
+  source = "./ec2"
+  nat_launch_template_id = module.launch_template.nat_id
+  nat_sg_ids = [module.sg.nat_id]
+  nat_subnet_id = module.vpc.public_subnet_ids[0]
 }

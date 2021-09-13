@@ -29,6 +29,11 @@ resource "aws_launch_template" "tuna-eks-cluster" {
     }
   }
 
+  # launch template update 시 항상 node가 먼저 생성되도록 하는것 같다.
+  lifecycle {
+    create_before_destroy = true
+  }
+
   user_data = base64encode(templatefile("${path.module}/userdata.tpl", { 
     CLUSTER_NAME = var.tuna-eks-cluster_name, 
     B64_CLUSTER_CA = var.tuna-eks-cluster_ca, 

@@ -7,6 +7,7 @@ resource "aws_eks_node_group" "node_group" {
   # 최소 t3.small 로 진행
   instance_types = ["t3.small"]
 
+  # $LATEST나 $DEFAULT 버전 사용 가능
   launch_template {
     id = var.tuna-eks-cluster-node-launch_template_id
     version = "1"

@@ -3,6 +3,39 @@ resource "aws_launch_template" "logic" {
 
   instance_type = "t2.micro"
 
+  name = "real_logic"
+
+  block_device_mappings {
+    device_name = "/dev/xvda"
+
+    ebs {
+      volume_size = 10
+    }
+  }
+
+  credit_specification {
+    cpu_credits = "standard"
+  }
+
+  tag_specifications {
+    resource_type = "instance"
+
+    tags = {
+      Name = "test"
+    }
+  }
+
+  user_data = base64encode(templatefile("${path.module}/user_data.tpl", {}))
+
+  network_interfaces {
+    security_groups = var.logic_security_group_ids
+  }
+}
+
+
+resource "aws_launch_template" "nat" {
+  image_id = "ami-07e3822d44637d67c"
+
   name = "logic"
 
   block_device_mappings {
@@ -17,8 +50,6 @@ resource "aws_launch_template" "logic" {
     cpu_credits = "standard"
   }
 
-  key_name = var.key_name
-
   tag_specifications {
     resource_type = "instance"
 
@@ -27,9 +58,7 @@ resource "aws_launch_template" "logic" {
     }
   }
 
-  user_data = base64encode(templatefile("${path.module}/user_data.sh", {}))
-
-  network_interfaces {
-    security_groups = var.logic_security_group_ids
-  }
+  # network_interfaces {
+  #   security_groups = var.nat_security_group_ids
+  # }
 }

@@ -1,0 +1,9 @@
+1. launch_template 업데이트 테스트
+2. 테라폼 테그 테스트
+
+
+# 실습기록
+1. launch template의 새로운 버전을 만들어도 auto scaling group에 변화가 보이지 않는다. (latest 태그가 있는데도 불구하고)
+2. auto scaling group의 launch template 버전의 최신인 2로 설정시도 -> 아무 변화 없음
+3. desired capacity를 2로 설정 -> 기존의 버전 1 한개, 새로운 버전 2 한개가 생성됨
+4. desired capacity를 1로 설정 -> 쿨다운시간 지난후 옜날 버전 삭제

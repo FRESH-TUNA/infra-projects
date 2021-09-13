@@ -12,3 +12,6 @@ variable "vpc_id" {
   description = "description"
 }
 
+variable "logic_target_group_arns" {
+  type = list
+}
