@@ -20,4 +20,6 @@ resource "aws_instance" "nat" {
 #   }
 
   vpc_security_group_ids = var.nat_sg_ids
+
+  source_dest_check = false
 }
