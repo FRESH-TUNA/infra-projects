@@ -22,7 +22,7 @@ resource "aws_subnet" "database" {
   vpc_id            = aws_vpc.knufesta2019.id
   count             = length(var.database_subnets)
   cidr_block        = element(var.database_subnets, count.index)
-  availability_zone = element(var.availability_zones, count.index)
+  availability_zone = element(var.db_availability_zones, count.index)
 
   tags = {
     Name        = "${var.app_name}"

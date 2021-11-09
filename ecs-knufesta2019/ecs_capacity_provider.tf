@@ -14,12 +14,6 @@ resource "aws_ecs_capacity_provider" "knufesta2019" {
   }
 }
 
-resource "aws_key_pair" "knufesta2019" {
-  key_name = "knufesta2019"
-  public_key = file("${path.module}/freshtuna.pub")
-}
-
-
 resource "aws_autoscaling_group" "knufesta2019" {
   # ... other configuration, including potentially other tags ...
   min_size = 0

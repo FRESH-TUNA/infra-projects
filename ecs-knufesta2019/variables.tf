@@ -40,6 +40,10 @@ variable "availability_zones" {
   description = "List of availability zones"
 }
 
+variable db_availability_zones {
+  description = "description"
+}
+
 variable "DB_PORT" {}
 variable "DB_NAME" {}
 variable "DB_USER" {}

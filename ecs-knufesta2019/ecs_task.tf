@@ -3,8 +3,11 @@
 # }
 resource "aws_ecs_task_definition" "aws-ecs-task" {
   family = "aws-ecs-task"
-  cpu = 256
-  memory = 256
+  # 0.256 vcpu
+  # cpu = 256
+  cpu = 350
+  # 256M
+  memory = 350
   execution_role_arn = aws_iam_role.ecsTaskExecutionRole.arn
   network_mode = "bridge"
   #platformFamily = "LINUX"
@@ -69,8 +72,12 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
            },
            {
             "name": "DB_HOST",
-            "value": "${aws_rds_cluster.knufesta2019.endpoint}"
+            "value": "${aws_db_instance.knufesta2019.address}"
            },
+          #  {
+          #    "name": "REPLICA_DB_HOST",
+          #    "value": "${aws_rds_instance.knufesta2019_replica.endpoint}"
+          #  },
            {
             "name": "DB_PORT",
             "value": "${var.DB_PORT}"
@@ -105,37 +112,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
    ])
 }
 
-resource "aws_ecs_service" "aws-ecs-service" {
-  name                 = "${var.app_name}-${var.app_environment}-ecs-service"
-  cluster              = aws_ecs_cluster.knufesta2019.id
-  task_definition      = aws_ecs_task_definition.aws-ecs-task.arn
-#   launch_type          = "FARGATE"
-  scheduling_strategy  = "REPLICA"
-  desired_count        = 2
-  force_new_deployment = true
 
-  # network_configuration {
-  #   subnets          = aws_subnet.public.*.id
-  #   # assign_public_ip = false
-  #   security_groups = [
-  #     aws_security_group.service_security_group.id,
-  #     aws_security_group.load_balancer_security_group.id
-  #   ]
-  # }
-
-  capacity_provider_strategy {
-    capacity_provider = aws_ecs_capacity_provider.knufesta2019.name
-    weight = 100
-  }
-
-  load_balancer {
-    target_group_arn = aws_lb_target_group.target_group.arn
-    container_name   = "knufesta2019"
-    container_port   = 80
-  }
-
-  depends_on = [aws_lb_listener.listener]
-}
 
 # resource "aws_security_group" "service_security_group" {
 #   vpc_id = aws_vpc.knufesta2019.id

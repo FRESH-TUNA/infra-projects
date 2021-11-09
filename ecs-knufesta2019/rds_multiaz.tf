@@ -3,25 +3,19 @@ resource "aws_db_subnet_group" "knufesta2019" {
   subnet_ids = aws_subnet.database.*.id
 }
 
-resource "aws_rds_cluster" "knufesta2019" {
-  cluster_identifier = "knufesta2019"
-  database_name      = var.DB_NAME
-  master_username    = var.DB_USER
-  master_password    = var.DB_PASSWORD
-  engine             = "aurora-postgresql"
-  db_subnet_group_name = aws_db_subnet_group.knufesta2019.name
-  vpc_security_group_ids = [aws_security_group.knufesta2019_database.id]
+resource "aws_db_instance" "knufesta2019" {
+  allocated_storage    = 10
+  engine               = "postgres"
+  instance_class       = "db.t3.micro"
+  name                 = var.DB_NAME
+  username             = var.DB_USER
+  password             = var.DB_PASSWORD
   skip_final_snapshot  = true
-}
+  db_subnet_group_name = aws_db_subnet_group.knufesta2019.name
+  multi_az = true
 
-resource "aws_rds_cluster_instance" "knufesta2019" {
-  count              = 1
-  identifier         = "knufesta2019-${count.index}"
-  cluster_identifier = aws_rds_cluster.knufesta2019.id
-  engine             = "aurora-postgresql"
-  instance_class     = "db.t3.medium"
+  vpc_security_group_ids = [aws_security_group.knufesta2019_database.id]
 }
-
 
 resource "aws_security_group" "knufesta2019_database" {
   vpc_id = aws_vpc.knufesta2019.id
