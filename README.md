@@ -28,3 +28,6 @@
 
 ### EKS 클러스터 실습<br>
 <a href="/eks-example">/eks-example</a>
+
+### 2019 강원대학교 축제제공 웹서비스 ECS 배포 프로젝트<br>
+<a href="/ecs-knufesta2019">/ecs-knufesta2019</a>
